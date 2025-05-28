@@ -1,0 +1,28 @@
+format:
+  - "&f"
+  - "&e&lTHÔNG TIN PHÓ BẢN"
+  - "&f Ải: &a<stage> &8/ &fĐợt &6<turn>"
+  - "&f Quái:"
+  - "&f - &r<display> &ex<amount>"
+  - "&f Progress: &8[<progress>&8] &e<percent>%"
+  - "&f"
+
+progress:
+  char: "▬"
+  max-char: 10
+  active: "&b&l"
+  inactive: "&f&l"
+
+
+format-complete:
+  - "&f"
+  - "&a&l      XUẤT SẮC! CÁC BẠN ĐÃ HOÀN THÀNH PHÓ BẢN"
+  - "&f"
+  - "&f        &nThống kê trận chiến:"
+  - "<statistic>"
+  - "&f"
+
+statistic: |-
+  &f
+  &f    	&e&l#<stt>  &a<player>
+  &f &7Total Mob: &f<killed> &8| &7Total Damage: &c<damage>

@@ -1,0 +1,178 @@
+EditPlayer: "&8[&a&lSetup PhoBan&8] &fNhập số lượng người chơi muốn đặt &7&o(Chat cancel để huỷ)"
+EditPrefix: "&8[&a&lSetup PhoBan&8] &fNhập tên hiển thị cho phòng chơi &7&o(Chat cancel để huỷ)"
+EditTime: "&8[&a&lSetup PhoBan&8] &fNhập thời gian kết thúc của phó bản (phút) &7&o(Chat cancel để huỷ)"
+NotInt: "&8[&a&lSetup PhoBan&8] &cBạn cần phải nhập vào đây một con số"
+Error: "&8[&a&lSetup PhoBan&8] &cUi, đã xảy ra lỗi: <error>"
+
+EditMob_Step1: "&8[&a&lSetup PhoBan&8] &fChọn vị trí &eMob Spawn &fbằng cách đập vào vị trí đó với &6Blaze Rod"
+EditMob_Step2: "&8[&a&lSetup PhoBan&8] &fHãy nhập vào khung Chat: &aadd&7, &aexit"
+EditMob_Step3: "&8[&a&lSetup PhoBan&8] &fNhập tên quái &e(MythicMobs) &fmuốn Spawn"
+EditMob_Step4: "&8[&a&lSetup PhoBan&8] &fNhập số lượng quái mà bạn muốn Spawn"
+EditMob_Step5: "&8[&a&lSetup PhoBan&8] &fNhập thời gian cho đợt này (tính bằng phút)"
+
+EditBoss_Step1: "&8[&a&lSetup PhoBan&8] &fChọn vị trí &eBOSS Spawn &fbằng cách đập vào vị trí đó với &6Blaze Rod"
+EditBoss_Step2: "&8[&a&lSetup PhoBan&8] &fHãy nhập vào khung Chat: &aadd&7, &aexit"
+EditBoss_Step3: "&8[&a&lSetup PhoBan&8] &fNhập tên BOSS &e(MythicMobs) &fmuốn Spawn"
+EditBoss_Step4: "&8[&a&lSetup PhoBan&8] &fNhập số lượng BOSS mà bạn muốn Spawn"
+EditBoss_Step5: "&8[&a&lSetup PhoBan&8] &fNhập thời gian cho đợt này (tính bằng phút)"
+
+RemoveMob: "&8[&a&l✔&8] &aBạn đã xóa Mob thành công"
+DeleteRoom: "&8[&a&l✔&8] &aBạn đã xoá phòng chơi thành công"
+EditChance: "&8[&a&lSetup PhoBan&8] &fHãy nhập tỉ lệ thưởng cho món đồ này"
+EditRewardAmount: "&8[&a&lSetup PhoBan&8] &fNhập số lượng phần thưởng mà người chơi nhận được"
+NotPlayer: "&8[&c&l✘&8] &cBạn không phải là người chơi"
+NoPermissions: "&8[&c&l✘&8] &cBạn không có quyền làm điều này!"
+EditType: "&8[&a&lSetup PhoBan&8] &fNhập TYPE phòng muốn chỉnh &7&o(Chat cancel để huỷ)"
+AddNewMob: "&8[&a&lSetup PhoBan&8] &fHãy thực hiện chọn vị trí Spawn nếu bạn vẫn muốn thêm &7&o(Chat complete để hoàn tất)"
+
+StartCountdown:
+  15:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fPhó bản sẽ bắt đầu sau &e&l15s"
+  5:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fPhó bản sẽ bắt đầu sau &e&l5"
+  4:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fPhó bản sẽ bắt đầu sau &e&l4"
+  3:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fPhó bản sẽ bắt đầu sau &e&l3"
+  2:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fPhó bản sẽ bắt đầu sau &e&l2"
+  1:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fPhó bản sẽ bắt đầu sau &e&l1"
+  0:
+    Title: "&a&lBẮT ĐẦU"
+    Subtitle: "&fChiến thôi nào anh em ơi!"
+
+TimeRemaining:
+  300: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &a5 phút"
+  240: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &a4 phút"
+  180: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &a3 phút"
+  120: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &a2 phút"
+  60: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &a1 phút"
+  30: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &e30 giây"
+  15: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &e15 giây"
+  5: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &c5"
+  4: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &c4"
+  3: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &c3"
+  2: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &c2"
+  1: "&c&l⚒ CHÚ Ý: &fPhó bản sẽ kết thúc và được đóng lại sau &c1"
+
+StageCountdown:
+  15:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fĐợt quái tiếp theo sẽ xuất hiện sau &e&l15s"
+  5:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fĐợt quái tiếp theo sẽ xuất hiện sau &e&l5"
+  4:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fĐợt quái tiếp theo sẽ xuất hiện sau &e&l4"
+  3:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fĐợt quái tiếp theo sẽ xuất hiện sau &e&l3"
+  2:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fĐợt quái tiếp theo sẽ xuất hiện sau &e&l2"
+  1:
+    Title: "&c&l⚠ WARNING ⚠"
+    Subtitle: "&fĐợt quái tiếp theo sẽ xuất hiện sau &e&l1"
+  0:
+    Title: "&a&lCHIẾN"
+    Subtitle: "&fĐợt quái đã xuất hiện"
+
+StageTime:
+  15: "&c&l⚒ CHÚ Ý: &fĐợt này sẽ kết thúc sau &e15 giây &fvà chuyển sang đợt tiếp theo"
+  5: "&c&l⚒ CHÚ Ý: &fĐợt này sẽ kết thúc sau &c5 giây &fvà chuyển sang đợt tiếp theo"
+  4: "&c&l⚒ CHÚ Ý: &fĐợt này sẽ kết thúc sau &c4 giây &fvà chuyển sang đợt tiếp theo"
+  3: "&c&l⚒ CHÚ Ý: &fĐợt này sẽ kết thúc sau &c3 giây &fvà chuyển sang đợt tiếp theo"
+  2: "&c&l⚒ CHÚ Ý: &fĐợt này sẽ kết thúc sau &c2 giây &fvà chuyển sang đợt tiếp theo"
+  1: "&c&l⚒ CHÚ Ý: &fĐợt này sẽ kết thúc sau &c1 giây &fvà chuyển sang đợt tiếp theo"
+
+PlayerJoin: "&8[&a&l+&8] &fNgười chơi &b<player> &fđã vào phó bản &e(<joined>/<max>)"
+PlayerQuit: "&8[&c&l-&8] &fNgười chơi &c<player> &fđã rời phó bản &e(<joined>/<max>)"
+Complete: "&8[&a&l✔&8] &a&lHOÀN THÀNH PHÓ BẢN"
+BroadcastComplete: "&c&l⚒ Woahh: &fNgười chơi &6<player> &fđã hoàn thành phó bản &r<prefix>"
+
+QuitCountdown:
+  5: "&c&l⚒ CHÚ Ý: &fBạn sẽ được dịch chuyển khỏi phó bản sau &e5"
+  4: "&c&l⚒ CHÚ Ý: &fBạn sẽ được dịch chuyển khỏi phó bản sau &e4"
+  3: "&c&l⚒ CHÚ Ý: &fBạn sẽ được dịch chuyển khỏi phó bản sau &e3"
+  2: "&c&l⚒ CHÚ Ý: &fBạn sẽ được dịch chuyển khỏi phó bản sau &e2"
+  1: "&c&l⚒ CHÚ Ý: &fBạn sẽ được dịch chuyển khỏi phó bản sau &e1"
+
+RoomExist: "&8[&c&l✘&8] &cPhòng này đã tồn tại, hãy thử lại"
+RoomNotExist: "&8[&c&l✘&8] &cPhòng này không tồn tại, hãy kiểm tra và thử lại"
+NotOnline: "&8[&c&l✘&8] &cNgười chơi này hiện tại không Online"
+GiveTurn: "&8[&a&l✔&8] &fBạn đã thêm &a<amount> lượt &fphó bản cho &b<player>"
+RoomStarted: "&8[&c&l✘&8] &cPhòng đang chuẩn bị hoặc đã bắt đầu"
+RoomFull: "&8[&c&l✘&8] &cPhòng chơi này đã đầy rồi!"
+RoomNotConfig: "&8[&c&l✘&8] &cVui lòng hoàn tất quá trình tuỳ chỉnh phòng"
+JoinRoomNotConfig: "&8[&c&l✘&8] &cPhòng này Admin chưa cài đặt xong, không thể vào được đâu!"
+NoTurn: "&8[&c&l✘&8] &cBạn không có lượt để tham gia phó bản này!"
+LeaderStart: "&fBạn có thể bắt đầu bằng lệnh &a&l/phoban start &fhoặc đợi đến khi đủ người"
+TimeOut: "&8[&c&l✘&8] &cPhó bản đã hết thời gian, bạn đã không hoàn thành được phó bản"
+LeaveOnJoin: "&fSử dụng &c&l/phoban leave &fđể thoát phó bản"
+MobsLeft: "&7Quái phó bản: &r<name> &f(<current>/<max>)"
+NoCommand: "&8[&c&l✘&8] &cKhông thể sử dụng lệnh khi đang trong phó bản"
+ListRoom: "&fDanh sách phòng: &a&l<rooms>"
+ConfigDone: "&a&lDONE! &aChỉnh sửa phó bản thành công"
+GlobalSpawnSet: "&a&lSet spawn thành công"
+DefaultSpawnSet: "&a&lThiết lập spawn mặc định sau khi hoàn thành phó bản thành công"
+AddRewardCommandSuccess: "&a&lThêm phần thưởng thành công, dùng lệnh /addrewards để thêm tiếp hoặc /complete để huỷ và mở gui"
+
+GiveTurnAll: "&8[&a&l✔&8] &aBạn đã thêm cấp lượt chơi mới cho toàn bộ người chơi"
+#GlobalSpawnSet: "&eChỉnh spawn thành công"
+
+Respawn: "&c&l⚒ &fHồi sinh thành công, bạn chỉ còn &a&l<amount> &flượt hồi sinh"
+NoMoreRespawn: "&c&l⚒ HÃY CỐ GẮNG TRONG LẦN TIẾP THEO NHÉ!"
+
+PointWin: "&8[&a&l✔&8] &fBạn đã hoàn thành phó bản và được &a&l+<point> điểm"
+PointDeath: "&c&l☠ &cBạn đã chết trong phó bản và bị &c&l-<point> điểm"
+PointLose: "&c&l☠ &cBạn đã thua phó bản và bị &c&l-<point> điểm"
+
+# Tin nhắn thông báo phần thưởng
+RewardReceived: "&8[&a&l✔&8] &fBạn đã nhận được phần thưởng: &a<reward_name>"
+RewardCommandSuccess: "&8[&a&l✔&8] &fBạn đã nhận được &a<command>&f từ phó bản!"
+InventoryFull: "&8[&e&l!&8] &eTúi đồ của bạn đã đầy, vật phẩm đã được thả xuống đất"
+RewardTitle:
+  Title: "&6&l⚜ PHẦN THƯỞNG ⚜"
+  Subtitle: "&fBạn đã nhận được &a<count> &fphần thưởng từ phó bản"
+NoReward: "&8[&e&l!&8] &fPhó bản này không có phần thưởng nào"
+
+GivePoint: "&8[&a&l✔&8] &fBạn đã thêm &a&l<amount> &fđiểm phó bản cho &b<player>"
+TakePoint: "&8[&a&l✔&8] &fBạn đã lấy đi &c&l<amount> &fđiểm phó bản của &b<player>"
+
+AddRewardCommand: "&8[&a&lSetup PhoBan&8] &fNhập câu lệnh muốn thêm, &ckhông cần dấu &e/&f, có thể chỉ định người chơi bằng &e<player>"
+
+Respawning:
+  Title: "&c&lĐANG HỒI SINH..."
+  Subtitle: "&fTiếp tục chiến đấu sau &e<time>"
+
+Help:
+  - ""
+  - "  &f&lPlugin: &e&lPhoBan Pro"
+  - ""
+  - " &7&o(( Các câu lệnh dành cho người chơi ))"
+  - " &f| &6/phoban: &fLựa chọn phó bản và phòng chơi"
+  - " &f| &6/phoban start: &fBắt đầu phòng khi là chủ phòng"
+  - " &f| &6/phoban join <tên>: &fTham gia vào phòng phó bản"
+  - " &f| &6/phoban top: &fMở bảng xếp hạng điểm phó bản"
+  - ""
+  - " &f| &6/phoban create <tên>: &fTạo phòng phó bản" #(phoban.admin)
+  - " &f| &6/phoban edit <tên>: &fChỉnh phòng phó bản" #(phoban.admin)
+  - " &f| &6/phoban add <player> <type> <amount>: &fCấp lượt phó bản" #(phoban.admin)
+  - " &f| &6/phoban add all: &fCấp thêm lượt phó bản cho toàn bộ Player" #(phoban.admin)
+  - " &f| &6/phoban setspawn: &fChỉnh Spawn chung cho các phòng" #(phoban.admin)
+  - " &f| &6/phoban setdefaultspawn: &fĐặt Spawn mặc định sau khi hoàn thành phó bản" #(phoban.admin)
+  - " &f| &6/phoban addrewards <tên>: &fThêm phần thưởng trên tay cho phòng chơi" #(phoban.admin)
+  - "&7&oKhi hoàn tất sẽ được chuyển đến chỗ đã thiết lập"
+  - ""
+  - " &f| &6/phoban reload: &fReload plugins" #(phoban.admin)
+  - " &f| &6/phoban list: &fXem danh sách phòng đã tạo" #(phoban.admin)
+  - " &f| &6/phoban givepoint <player> <amount>: &fGive điểm phó bản" #(phoban.admin)
+  - " &f| &6/phoban takepoint <player> <amount>: &fLấy điểm phó bản" #(phoban.admin)

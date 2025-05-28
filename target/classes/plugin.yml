@@ -1,0 +1,24 @@
+name: AE-PhoBan
+version: '1.0.1'
+main: com.hongminh54.phoban.AEPhoBan
+api-version: '1.13'
+author: [TYBZI]
+depend: [MythicMobs, WorldEdit]
+softdepend: [PlaceholderAPI, ProSkillAPI, SkillAPI]
+commands:
+  aephoban:
+    aliases: [phoban]
+
+permissions:
+  aephoban.use:
+    description: Cho phép sử dụng lệnh cơ bản của plugin AE-PhoBan
+    default: true
+  phoban.admin:
+    description: Cho phép sử dụng tất cả các lệnh admin của plugin AE-PhoBan
+    default: op
+  phoban.respawn.3:
+    description: Cho phép hồi sinh 3 lần trong phó bản
+    default: false
+  phoban.respawn.5:
+    description: Cho phép hồi sinh 5 lần trong phó bản
+    default: false

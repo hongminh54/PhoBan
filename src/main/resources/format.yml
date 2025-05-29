@@ -4,7 +4,7 @@ format:
   - "&f Ải: &a<stage> &8/ &fĐợt &6<turn>"
   - "&f Quái:"
   - "&f - &r<display> &ex<amount>"
-  - "&f Progress: &8[<progress>&8] &e<percent>%"
+  - "&f Tiến độ: &8[<progress>&8] &e<percent>%"
   - "&f"
 
 progress:
@@ -16,7 +16,7 @@ progress:
 
 format-complete:
   - "&f"
-  - "&a&l      XUẤT SẮC! CÁC BẠN ĐÃ HOÀN THÀNH PHÓ BẢN"
+  - "&a&l      ĐÃ HOÀN THÀNH PHÓ BẢN"
   - "&f"
   - "&f        &nThống kê trận chiến:"
   - "<statistic>"
@@ -25,4 +25,4 @@ format-complete:
 statistic: |-
   &f
   &f    	&e&l#<stt>  &a<player>
-  &f &7Total Mob: &f<killed> &8| &7Total Damage: &c<damage>
+  &f &7Tổng quái giết: &f<killed> &8| &7Tổng sát thương: &c<damage>

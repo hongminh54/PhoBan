@@ -9,29 +9,31 @@ TopFormat:
   Name: "&e&l#<top>. &f&n<player>"
   Lore:
     - ""
-    - " &7Điểm phó bản: &c&l<point> ⚒"
+    - " &fĐiểm phó bản: &c&l<point> ⚒"
     - ""
-    - "&7&oTham gia phó bản và hoàn"
-    - "&7&othành nó để có được điểm!"
+    - "&7(Điểm phó bản có thể kiếm được"
+    - "&7thông qua chiến thắng phó bản)"
+    - ""
+    - "&7&oBảng xếp hạng sẽ được reset mỗi 1 tháng"
 
 MyTopFormat:
   ID: sign
   Name: "&e&lNgười chơi: &f&n<player>"
   Lore:
     - ""
-    - " &7Vị trí xếp hạng: &a&l#<top>"
+    - " &fXếp hạng: &a&l#<top>"
     - ""
-    - " &7Điểm phó bản: &c&l<point> ⚒"
+    - " &fĐiểm phó bản: &c&l<point> ⚒"
     - ""
     - "&7&oThông tin điểm phó bản của bạn"
 
 Content:
   blank1:
     ID: stained_glass_pane
-    Name: "&r"
+    Name: "&eAEMINE.VN"
     Slot: [0, 8, 36, 44]
   blank2:
     ID: stained_glass_pane
-    Data: 15
-    Name: "&r"
+    Data: 10
+    Name: "&eAEMINE.VN"
     Slot: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 17, 18, 20, 26, 27, 28, 29, 35, 37, 38, 39, 40, 41, 42, 43]

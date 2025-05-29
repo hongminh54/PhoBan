@@ -1,7 +1,3 @@
-# Our Website: www.dihoastore.net
-# Email: dihoastore.mc@gmail.com
-# Fanpage: www.facebook.com/dihoastore/
-
 # Placeholder sử dụng cho Board: %ae-phoban_prefix% - Hiển thị tên của phó bản
 #                                %ae-phoban_time% - Đếm ngược thời gian phòng chơi
 #                                %ae-phoban_minplayers% - Người chơi tối thiểu
@@ -46,7 +42,7 @@ Settings:
   SpawnRadius: 2
 
   # Số lượt tham gia phó bản mặc định mỗi ngày của người chơi
-  DefaultTurn: 1
+  DefaultTurn: 20
   # Nếu để là day thì mỗi khi qua ngày mới sẽ cấp 1 lượt
   # Nếu để là hour thì mỗi giờ sẽ cấp 1 lượt
   # Số lượt cấp được tính theo DefaultTurn:

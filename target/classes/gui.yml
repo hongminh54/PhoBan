@@ -347,6 +347,8 @@ EditorGui:
         - "&7&o(( Click vào đây để cài đặt ))"
       Slot: [16]
       ClickType: EditType
+  LockedStatus: "&c[KHÓA]"
+  UnlockedStatus: "&a[MỞ]"
 
 
 RewardGui:
@@ -421,60 +423,60 @@ PhoBanGui:
   WaitingRoom:
     ID: stained_clay
     Data: 13
-    Name: "&f&lTHAM GIA: <prefix>"
+    Name: "&aTHAM GIA PHÓ BẢN: &b&l<prefix>"
     Lore:
       - "&7&m                                   "
-      - "&7Người chơi: &e<current>/<max> &fplayers"
+      - "&fSố lượng: &e<current>/<max> &fngười"
       - "<players>"
       - ""
-      - "&7Thời gian: &a<time>"
+      - "&fThời gian: &a<time>"
       - ""
-      - "&7Trạng thái: &a<status>"
+      - "&fTrạng thái: &a<status>"
       - ""
-      - "&c&l⚠ &7Khi chết sẽ bị trừ điểm nên"
-      - "&7hãy cẩn thận khi chiến đấu nhé!"
+      - "&7(Khi chết ở phó bản sẽ bị trừ điểm)"
       - "&7&m                                   "
   StartingRoom:
     ID: stained_clay
     Data: 4
-    Name: "&f&lTHAM GIA: <prefix>"
+    Name: "&aTHAM GIA PHÓ BẢN: &b&l<prefix>"
     Lore:
       - "&7&m                                   "
-      - "&7Người chơi: &e<current>/<max> &fplayers"
+      - "&fSố lượng: &e<current>/<max> &fngười"
       - "<players>"
       - ""
-      - "&7Thời gian: &a<time>"
+      - "&fThời gian: &a<time>"
       - ""
-      - "&7Trạng thái: &a<status>"
+      - "&fTrạng thái: &a<status>"
       - ""
-      - "&c&l⚠ &7Khi chết sẽ bị trừ điểm nên"
-      - "&7hãy cẩn thận khi chiến đấu nhé!"
+      - "&7(Khi chết ở phó bản sẽ bị trừ điểm)"
       - "&7&m                                   "
   PlayingRoom:
     ID: stained_clay
     Data: 14
-    Name: "&f&lTHAM GIA: <prefix>"
+    Name: "&aTHAM GIA PHÓ BẢN: &b&l<prefix>"
     Lore:
       - "&7&m                                   "
-      - "&7Người chơi: &e<current>/<max> &fplayers"
+      - "&fSố lượng: &e<current>/<max> &fngười"
       - "<players>"
       - ""
-      - "&7Thời gian: &a<time>"
+      - "&fThời gian: &a<time>"
       - ""
-      - "&7Trạng thái: &a<status>"
+      - "&fTrạng thái: &a<status>"
       - ""
-      - "&c&l⚠ &7Khi chết sẽ bị trừ điểm nên"
-      - "&7hãy cẩn thận khi chiến đấu nhé!"
+      - "&7(Khi chết ở phó bản sẽ bị trừ điểm)"
       - "&7&m                                   "
 
   StatusFormat:
-    WAITING: "&a&lCHƯA BẮT ĐẦU"
-    STARTING: "&6&lĐANG CHUẨN BỊ"
-    PLAYING: "&c&lĐÃ BẮT ĐẦU"
+    WAITING: "&aĐang Chờ"
+    STARTING: "&6Đang Chuẩn Bị"
+    PLAYING: "&cTrong Trận"
 
   TimeFormat:
     Minute: "<minute> phút"
     Second: "<second> giây"
+
+  LockedStatus: "&c[KHÓA]"
+  UnlockedStatus: ""
 
 ChooseTypeGui:
   Title: "&lChọn Phó Bản"
@@ -490,32 +492,62 @@ ChooseTypeGui:
 
   NextPage:
     ID: arrow
-    Name: "&6&l&oNext Page"
+    Name: "&eTrang Sau"
     Slot: [41]
   PreviousPage:
     ID: arrow
-    Name: "&6&l&oPrevious Page"
+    Name: "&eTrang Trước"
     Slot: [39]
 
   TypeFormat:
-    ID: SLIME_BALL
-    Name: "&f&lPHÓ BẢN: &e&l<type>"
+    ID: DIAMOND_SWORD
+    Name: "&cPHÓ BẢN: &e&l<type>"
     Lore:
       - ""
-      - " &7Trạng thái: <status>"
+      - " &fTrạng thái: <status>"
       - ""
-      - " &e▸ &f&nTHÔNG TIN PHÓ BẢN"
+      - "&e&o(( CLick vào đây để chọn phòng ))"
       - ""
-      - " &7Số lượng ải: &e3"
-      - " &7Mức độ đánh giá: &a&lDỄ ẸC"
-      - ""
-      - " &e▸ &f&nPHẦN THƯỞNG"
-      - ""
-      - " &7- &ax64 &fviên kim cương"
-      - "    &7&o(có thể tùy chỉnh)"
-      - ""
-      - "&e&o(( CLick vào để chọn phòng ))"
-
   Format:
-    NoTurn: "&c&l✘ HẾT LƯỢT"
-    Join: "&a&l✔ CÒN LƯỢT"
+    NoTurn: "&cHết Lượt"
+    Join: "&aCòn Lượt"
+
+# Cấu hình giao diện xem trước phần thưởng
+RewardPreviewGui:
+  Title: "&6&lPhần Thưởng | <prefix>"
+  Rows: 6
+  
+  # Cấu hình border xung quanh menu
+  Border:
+    ID: stained_glass_pane
+    Data: 15
+    Name: "&r"
+  
+  # Viền trên cùng [0-8]
+  TopBorderSlots: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  
+  # Viền dưới cùng [45-53]
+  BottomBorderSlots: [45, 46, 47, 48, 50, 51, 52, 53]
+  
+  # Các cột viền hai bên
+  SideBorderSlots: [9, 18, 27, 36, 17, 26, 35, 44]
+  
+  # Item đóng menu
+  CloseButton:
+    ID: barrier
+    Name: "&c&lĐóng"
+    Slot: 49
+  
+  # Cấu hình hiển thị phần thưởng dạng lệnh
+  CommandReward:
+    ID: paper
+    Name: "&a<friendly_name>"
+    Lore:
+      - "&7Phần thưởng dạng lệnh"
+      - ""
+      - "&7Tỉ lệ: &e<chance>%"
+  
+  # Cấu hình cho việc thêm tỉ lệ vào lore của phần thưởng dạng item
+  ItemRewardLore:
+    - ""
+    - "&7Tỉ lệ: &e<chance>%"

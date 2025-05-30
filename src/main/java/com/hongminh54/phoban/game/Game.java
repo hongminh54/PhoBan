@@ -115,6 +115,9 @@ public class Game {
 		String roomType = room.getString("Type");
 
 		Game g = new Game(name, time, spawn, max_players, boss, timeBoss, room, roomType, configFile);
+		
+		// Cập nhật trạng thái khóa từ file cấu hình
+		g.locked = room.getBoolean("Locked", false);
 
 		for(int i = 1; i <= maxStage; i++) {
 			if(!room.contains("Mob" + i)) continue;
@@ -186,13 +189,17 @@ public class Game {
 				roomContains >= 1 &&
 				room.contains("RewardAmount") &&
 				room.contains("Spawn") &&
-				room.contains("Type");
+				room.contains("Type") &&
+				!room.getBoolean("Locked", false);
 	}
 	
 	
 	public static int getTurn(OfflinePlayer p, String type) {
 		FileConfiguration data = FileManager.getFileConfig(Files.DATA);
-		if(!data.contains(p.getName() + ".Turn." + type)) return 1;
+		if(!data.contains(p.getName() + ".Turn." + type)) {
+			int defaultTurn = FileManager.getFileConfig(Files.CONFIG).getInt("Settings.DefaultTurn", 1);
+			return defaultTurn;
+		}
 		return data.getInt(p.getName() + ".Turn." + type);
 	}
 	
@@ -315,6 +322,9 @@ public class Game {
 
 	private final Map<String, Integer> totalKill = new HashMap<>();
 	private final Map<String, Double> totalDamage = new HashMap<>();
+	
+	// Thuộc tính để kiểm tra trạng thái khóa phòng
+	private boolean locked = false;
 	
 	public Game(String name, int time, Location spawn, int max_players, List<GameMob> boss, HashMap<String, Integer> timeBoss, FileConfiguration room, String type, File configFile) {
 		this.name = name;
@@ -779,6 +789,9 @@ public class Game {
 				Location finalLocation = location;
 				Bukkit.getScheduler().scheduleSyncDelayedTask(AEPhoBan.inst(), () -> {
 					p.teleport(finalLocation);
+					if(this.quit_countdown) {
+						p.sendMessage(Messages.get("TeleportComplete"));
+					}
 				}, 1);
 			}
 		} else {
@@ -1122,6 +1135,34 @@ public class Game {
 		return this.type;
 	}
 
+	/**
+	 * Kiểm tra xem phòng có bị khóa không
+	 * 
+	 * @return true nếu phòng bị khóa
+	 */
+	public boolean isLocked() {
+		return this.locked;
+	}
+	
+	/**
+	 * Đặt trạng thái khóa cho phòng
+	 * 
+	 * @param locked trạng thái khóa
+	 */
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+		this.room.set("Locked", locked);
+		FileManager.saveFileConfig(this.room, this.configFile);
+	}
+	
+	/**
+	 * Lấy trạng thái khóa từ file cấu hình
+	 * 
+	 * @return trạng thái khóa từ file cấu hình
+	 */
+	public boolean getLockedFromConfig() {
+		return this.room.getBoolean("Locked", false);
+	}
 
 	public void sendInfo(Map<String, Integer> mobMap) {
 		int stage = this.realStage;

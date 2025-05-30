@@ -321,6 +321,8 @@ EditorGui:
         - "&7&o(( Click vào đây để cài đặt ))"
       Slot: [16]
       ClickType: EditType
+  LockedStatus: "&c[KHÓA]"
+  UnlockedStatus: "&a[MỞ]"
 
 
 RewardGui:
@@ -441,6 +443,8 @@ PhoBanGui:
   TimeFormat:
     Minute: "<minute> phút"
     Second: "<second> giây"
+  LockedStatus: "&c[KHÓA]"
+  UnlockedStatus: ""
 
 ChooseTypeGui:
   Title: "&lChọn Phó Bản"
@@ -484,3 +488,42 @@ ChooseTypeGui:
   Format:
     NoTurn: "&c&l✘ HẾT LƯỢT"
     Join: "&a&l✔ CÒN LƯỢT"
+
+# Cấu hình giao diện xem trước phần thưởng
+RewardPreviewGui:
+  Title: "&6&lPhần Thưởng | <prefix>"
+  Rows: 6
+  
+  # Cấu hình border xung quanh menu
+  Border:
+    ID: black_stained_glass_pane
+    Name: "&r"
+  
+  # Viền trên cùng [0-8]
+  TopBorderSlots: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  
+  # Viền dưới cùng [45-53]
+  BottomBorderSlots: [45, 46, 47, 48, 50, 51, 52, 53]
+  
+  # Các cột viền hai bên
+  SideBorderSlots: [9, 18, 27, 36, 17, 26, 35, 44]
+  
+  # Item đóng menu
+  CloseButton:
+    ID: barrier
+    Name: "&c&lĐóng"
+    Slot: 49
+  
+  # Cấu hình hiển thị phần thưởng dạng lệnh
+  CommandReward:
+    ID: paper
+    Name: "&a<friendly_name>"
+    Lore:
+      - "&7Phần thưởng dạng lệnh"
+      - ""
+      - "&7Tỉ lệ: &e<chance>%"
+  
+  # Cấu hình cho việc thêm tỉ lệ vào lore của phần thưởng dạng item
+  ItemRewardLore:
+    - ""
+    - "&7Tỉ lệ: &e<chance>%"

@@ -11,11 +11,12 @@
 
 #                                %ae-phoban_point_<player>% - Điểm phó bản của người chơi chỉ định
 #                                %ae-phoban_rank_<player>% - Vị trí xếp hạng của người chơi chỉ định
-#                                (Nếu đặt <player> = DiHoaStore thì sẽ hiện điểm của DiHoaStore)
+#                                (Nếu đặt <player> = TYBZI thì sẽ hiện điểm của TYBZI)
 
 
 Settings:
   # Lệnh được phép dùng khi trong phó bản
+  # Người chơi có quyền phoban.bypass.commandwhitelist sẽ bỏ qua giới hạn này
   CommandWhitelist:
     - "menu"
     - "tp(.*)"
@@ -48,9 +49,7 @@ Settings:
   # Số lượt cấp được tính theo DefaultTurn:
   AutoReset: day
 
-  CommandAliases:
-    - "pbp"
-    - "pb"
+  CommandAliases: []
 
   # Phần thưởng ở dạng Command cho toàn bộ người chơi khi hoàn tất phó bản
   RewardCommand:

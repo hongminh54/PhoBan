@@ -31,6 +31,7 @@ import com.hongminh54.phoban.gui.ChooseTypeGui;
 import com.hongminh54.phoban.gui.EditorGui;
 import com.hongminh54.phoban.gui.PhoBanGui;
 import com.hongminh54.phoban.gui.RewardGui;
+import com.hongminh54.phoban.gui.RewardPreviewGui;
 import com.hongminh54.phoban.gui.TopGui;
 import com.hongminh54.phoban.listener.PlayerCommandPreprocessListener;
 import com.hongminh54.phoban.listener.PlayerQuitListener;
@@ -77,6 +78,7 @@ public final class AEPhoBan extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new PlayerCommandPreprocessListener(), this);
             Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
             Bukkit.getPluginManager().registerEvents(new TopGui(), this);
+            Bukkit.getPluginManager().registerEvents(new RewardPreviewGui(), this);
 
             if (bukkitAPIHelper.packageName.equals("io.lumine.mythic.bukkit")) {
                 Bukkit.getPluginManager().registerEvents(new MMListener(), this);
@@ -159,7 +161,7 @@ public final class AEPhoBan extends JavaPlugin {
         }
         switch (args[0].toLowerCase()) {
             case "create": {
-                if (!sender.hasPermission("phoban.admin")) {
+                if (!sender.hasPermission("phoban.edit")) {
                     sender.sendMessage(Messages.get("NoPermissions"));
                     return true;
                 }
@@ -192,7 +194,7 @@ public final class AEPhoBan extends JavaPlugin {
             }
 
             case "edit": {
-                if (!sender.hasPermission("phoban.admin")) {
+                if (!sender.hasPermission("phoban.edit")) {
                     sender.sendMessage(Messages.get("NoPermissions"));
                     return true;
                 }
@@ -319,7 +321,7 @@ public final class AEPhoBan extends JavaPlugin {
             }
 
             case "list": {
-                if (!sender.hasPermission("phoban.admin")) {
+                if (!sender.hasPermission("phoban.edit")) {
                     sender.sendMessage(Messages.get("NoPermissions"));
                     return true;
                 }
@@ -356,6 +358,11 @@ public final class AEPhoBan extends JavaPlugin {
 
                     if (!Game.canJoin(game.getConfig())) {
                         p.sendMessage(Messages.get("JoinRoomNotConfig"));
+                        return true;
+                    }
+                    
+                    if (game.isLocked() && !p.hasPermission("phoban.admin")) {
+                        p.sendMessage(Messages.get("RoomLocked"));
                         return true;
                     }
 
@@ -476,7 +483,7 @@ public final class AEPhoBan extends JavaPlugin {
             }
 
             case "addrewards":
-                if (!sender.hasPermission("phoban.admin")) {
+                if (!sender.hasPermission("phoban.edit")) {
                     sender.sendMessage(Messages.get("NoPermissions"));
                     return true;
                 }
@@ -511,10 +518,57 @@ public final class AEPhoBan extends JavaPlugin {
                 room.set("Reward." + id + ".Item", itemHand);
                 room.set("Reward." + id + ".Chance", 100);
                 FileManager.saveFileConfig(room, configFile);
+                
+                game.setLocked(true);
+                player.sendMessage(Messages.get("RoomLockedAfterEdit"));
 
                 RewardGui.editor.put(player, game.getName() + ":editchance:" + id+":2");
                 player.sendMessage(Messages.get("EditChance"));
                 addRewardsMap.put(player.getName(), game.getName());
+                return true;
+                
+            case "lock":
+                if (!sender.hasPermission("phoban.admin")) {
+                    sender.sendMessage(Messages.get("NoPermissions"));
+                    return true;
+                }
+                
+                if (args.length < 2) {
+                    sender.sendMessage(Messages.get("LockCommandUsage"));
+                    return true;
+                }
+                
+                game = Game.getGame(args[1]);
+                
+                if (game == null) {
+                    sender.sendMessage(Messages.get("RoomNotExist"));
+                    return true;
+                }
+                
+                game.setLocked(true);
+                sender.sendMessage(Messages.get("RoomLockedSuccess").replace("<room>", game.getName()));
+                return true;
+                
+            case "unlock":
+                if (!sender.hasPermission("phoban.admin")) {
+                    sender.sendMessage(Messages.get("NoPermissions"));
+                    return true;
+                }
+                
+                if (args.length < 2) {
+                    sender.sendMessage(Messages.get("UnlockCommandUsage"));
+                    return true;
+                }
+                
+                game = Game.getGame(args[1]);
+                
+                if (game == null) {
+                    sender.sendMessage(Messages.get("RoomNotExist"));
+                    return true;
+                }
+                
+                game.setLocked(false);
+                sender.sendMessage(Messages.get("RoomUnlocked").replace("<room>", game.getName()));
                 return true;
         }
         return false;

@@ -7,7 +7,7 @@ depend: [MythicMobs, WorldEdit]
 softdepend: [PlaceholderAPI, ProSkillAPI, SkillAPI]
 commands:
   aephoban:
-    aliases: [phoban]
+    aliases: [phoban, pb]
 
 permissions:
   aephoban.use:

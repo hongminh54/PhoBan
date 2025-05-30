@@ -68,6 +68,11 @@ public class EditorGui implements Listener {
         replace.put("<max_players>", Collections.singletonList(String.valueOf(room.getInt("Player", 0))));
         replace.put("<prefix>", Collections.singletonList(room.getString("Prefix", "").replace("&", "§")));
         replace.put("<time>", Collections.singletonList(String.valueOf(room.getInt("Time", 0))));
+        
+        // Hiển thị trạng thái khóa
+        boolean isLocked = room.getBoolean("Locked", false);
+        replace.put("<locked_status>", Collections.singletonList(isLocked ? FileManager.getFileConfig(Files.GUI).getString("EditorGui.LockedStatus", "&cĐã khóa").replace("&", "§") 
+                                                                      : FileManager.getFileConfig(Files.GUI).getString("EditorGui.UnlockedStatus", "&aMở khóa").replace("&", "§")));
 
         for (int i = 1; i <= Game.maxStage; i++) {
             List<String> lores = new ArrayList<>();
@@ -152,6 +157,16 @@ public class EditorGui implements Listener {
             p.closeInventory();
             p.openInventory(inv);
             viewers.put(p, name);
+            
+            // Tự động khóa phòng khi mở để chỉnh sửa
+            FileConfiguration config = room;
+            config.set("Locked", true);
+            FileManager.saveFileConfig(config, fileManager.getFile());
+            
+            if (game != null) {
+                game.setLocked(true);
+                p.sendMessage(Messages.get("RoomLockedAfterEdit"));
+            }
         });
     }
 

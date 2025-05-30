@@ -52,6 +52,11 @@ public class PlayerCommandPreprocessListener implements Listener {
 	public void onCommand2(PlayerCommandPreprocessEvent e) {
 		Player p = e.getPlayer();
 		if(PlayerData.data().containsKey(p)) {
+			// Kiểm tra quyền bypass command whitelist
+			if(p.hasPermission("phoban.bypass.commandwhitelist")) {
+				return;
+			}
+			
 			String cmd = e.getMessage().replaceFirst("/", "").toLowerCase();
 			String[] arr = cmd.split(" ");
 			if(arr.length > 1 && arr[1].equalsIgnoreCase("start")) return;

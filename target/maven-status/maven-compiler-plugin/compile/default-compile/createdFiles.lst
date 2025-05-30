@@ -31,6 +31,7 @@ com\hongminh54\phoban\utils\Utils.class
 com\hongminh54\phoban\gui\EditorGui$6.class
 com\hongminh54\phoban\utils\ItemBuilder.class
 com\hongminh54\phoban\gui\EditorGui.class
+com\hongminh54\phoban\gui\RewardPreviewGui.class
 com\hongminh54\phoban\game\Game$1.class
 com\hongminh54\phoban\utils\ItemUtil.class
 com\hongminh54\phoban\gui\TopGui$1.class

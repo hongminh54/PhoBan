@@ -19,7 +19,9 @@ public class AEPhoBanTabCompleter implements TabCompleter {
 
     private static final List<String> ADMIN_COMMANDS = Arrays.asList(
             "create", "edit", "add", "reload", "list", "setspawn", "setdefaultspawn", 
-            "givepoint", "takepoint", "addrewards"
+            "givepoint", "takepoint", "addrewards",
+            "help", "leave", "join", "start", "top",
+            "lock", "unlock"
     );
     
     private static final List<String> PLAYER_COMMANDS = Arrays.asList(
@@ -51,8 +53,14 @@ public class AEPhoBanTabCompleter implements TabCompleter {
             // Các lệnh phụ
             switch (args[0].toLowerCase()) {
                 case "join":
-                    return filterCompletions(Game.listGame(), args[1]);
+                    if (args.length == 2) {
+                        return filterCompletions(Game.listGame(), args[1]);
+                    }
+                    break;
                 case "edit":
+                case "lock":
+                case "unlock":
+                case "addrewards":
                     if (player.hasPermission("phoban.admin")) {
                         return filterCompletions(Game.listGameWithoutCompleteSetup(), args[1]);
                     }
@@ -67,11 +75,6 @@ public class AEPhoBanTabCompleter implements TabCompleter {
                                         .filter(name -> !existingRooms.contains(name))
                                         .collect(Collectors.toList()),
                                 args[1]);
-                    }
-                    break;
-                case "addrewards":
-                    if (player.hasPermission("phoban.admin")) {
-                        return filterCompletions(Game.listGameWithoutCompleteSetup(), args[1]);
                     }
                     break;
                 case "add":

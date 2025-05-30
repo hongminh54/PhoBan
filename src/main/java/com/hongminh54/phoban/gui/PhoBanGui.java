@@ -17,6 +17,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import com.hongminh54.phoban.AEPhoBan;
 import com.hongminh54.phoban.game.Game;
 import com.hongminh54.phoban.game.GameStatus;
 import com.hongminh54.phoban.manager.FileManager;
@@ -62,6 +63,13 @@ public class PhoBanGui implements Listener {
             replace.put("<players>", lores);
             replace.put("<time>", Collections.singletonList(timeFormat(g.getTimeLeft())));
             replace.put("<status>", Collections.singletonList(FileManager.getFileConfig(Files.GUI).getString("PhoBanGui.StatusFormat." + g.getStatus().toString(), "").replace("&", "§")));
+            
+            // Thêm thông tin về trạng thái khóa
+            boolean isLocked = g.isLocked();
+            String lockStatus = isLocked ? 
+                FileManager.getFileConfig(Files.GUI).getString("PhoBanGui.LockedStatus", "&c[KHÓA]").replace("&", "§") : 
+                FileManager.getFileConfig(Files.GUI).getString("PhoBanGui.UnlockedStatus", "").replace("&", "§");
+            replace.put("<locked>", Collections.singletonList(lockStatus));
 
             ItemStack item = (g.getStatus().equals(GameStatus.WAITING)) ? ItemBuilder.build(Files.GUI, "PhoBanGui.WaitingRoom", replace) : (g.getStatus().equals(GameStatus.STARTING)) ? ItemBuilder.build(Files.GUI, "PhoBanGui.StartingRoom", replace) : ItemBuilder.build(Files.GUI, "PhoBanGui.PlayingRoom", replace);
 
@@ -193,32 +201,26 @@ public class PhoBanGui implements Listener {
                     return;
                 }
                 case "joinroom": {
-                    /*String name = nbt.getString("PhoBanGui_Room");*/
-                    String name = NBTTag.getKey(click, "PhoBanGui_Room");
-                    Game game = Game.getGame(name);
-
-                    if (game != null && game.getStatus().equals(GameStatus.WAITING)) {
-                        if (game.isFull()) {
-                            p.sendMessage(Messages.get("RoomFull"));
-                            return;
+                    String roomName = NBTTag.getKey(click, "PhoBanGui_Room");
+                    if (roomName == null || roomName.isEmpty()) return;
+                    
+                    // Nếu là chuột phải, hiển thị GUI xem trước phần thưởng
+                    if (e.getClick().isRightClick()) {
+                        Game game = Game.getGame(roomName);
+                        if (game == null) return;
+                        
+                        if (!RewardPreviewGui.open(p, roomName)) {
+                            p.sendMessage(Messages.get("NoRewardToPreview"));
                         }
-
-                        if (!Game.canJoin(game.getConfig())) {
-                            p.sendMessage(Messages.get("JoinRoomNotConfig"));
-                            return;
-                        }
-
-                        game.join(p);
-
-                        if (game.isLeader(p)) p.sendMessage(Messages.get("LeaderStart"));
                         return;
                     }
-
-                    if ((game != null && game.getStatus().equals(GameStatus.STARTING)) || (game != null && game.getStatus().equals(GameStatus.PLAYING))) {
-                        p.sendMessage(Messages.get("RoomStarted"));
-                        return;
-                    }
-
+                    
+                    // Xử lý chuột trái (tham gia phòng) như bình thường
+                    p.closeInventory();
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(AEPhoBan.inst(), () -> {
+                        p.performCommand("phoban join " + roomName);
+                    }, 1);
+                    return;
                 }
             }
         }

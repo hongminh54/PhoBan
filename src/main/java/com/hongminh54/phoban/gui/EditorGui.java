@@ -306,11 +306,30 @@ public class EditorGui implements Listener {
                         FileManager.saveFileConfig(rooms, file);
                     }
                     
+                    // Lưu trạng thái khóa hiện tại
+                    boolean wasLocked = rooms.getBoolean("Locked", false);
+                    
+                    // Tạm thời mở khóa phòng để có thể hoàn tất cấu hình
+                    rooms.set("Locked", false);
+                    FileManager.saveFileConfig(rooms, file);
+                    
                     if (!Game.canJoin(rooms)) {
+                        // Nếu vẫn không thể hoàn tất cấu hình, khôi phục trạng thái khóa
+                        rooms.set("Locked", wasLocked);
+                        FileManager.saveFileConfig(rooms, file);
                         p.sendMessage(Messages.get("RoomNotConfig"));
                         return;
                     }
+                    
+                    // Nạp phòng vào hệ thống
                     Game.load(room, rooms, file);
+                    
+                    // Khôi phục trạng thái khóa nếu cần
+                    Game game = Game.getGame(room);
+                    if (game != null) {
+                        game.setLocked(wasLocked);
+                    }
+                    
                     p.closeInventory();
                     p.sendMessage(Messages.get("ConfigDone"));
 

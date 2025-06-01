@@ -326,6 +326,9 @@ public class Game {
 	// Thuộc tính để kiểm tra trạng thái khóa phòng
 	private boolean locked = false;
 	
+	// Thuộc tính để kiểm tra trạng thái khóa phòng bởi chủ phòng
+	private boolean lockedByLeader = false;
+	
 	public Game(String name, int time, Location spawn, int max_players, List<GameMob> boss, HashMap<String, Integer> timeBoss, FileConfiguration room, String type, File configFile) {
 		this.name = name;
 		this.status = GameStatus.WAITING;
@@ -1162,6 +1165,61 @@ public class Game {
 	 */
 	public boolean getLockedFromConfig() {
 		return this.room.getBoolean("Locked", false);
+	}
+
+	/**
+	 * Kiểm tra xem phòng có bị khóa bởi chủ phòng không
+	 * 
+	 * @return true nếu phòng bị khóa bởi chủ phòng
+	 */
+	public boolean isLockedByLeader() {
+		return this.lockedByLeader;
+	}
+	
+	/**
+	 * Đặt trạng thái khóa phòng bởi chủ phòng
+	 * 
+	 * @param locked trạng thái khóa
+	 */
+	public void setLockedByLeader(boolean locked) {
+		this.lockedByLeader = locked;
+	}
+	
+	/**
+	 * Đá người chơi khỏi phòng
+	 * 
+	 * @param leader Người chơi là chủ phòng
+	 * @param target Người chơi bị đá
+	 * @return true nếu đá thành công, false nếu không thành công
+	 */
+	public boolean kickPlayer(Player leader, Player target) {
+		// Kiểm tra nếu người chơi là chủ phòng
+		if (!isLeader(leader)) {
+			return false;
+		}
+		
+		// Kiểm tra trạng thái phòng, chỉ cho phép đá khi đang chờ hoặc chuẩn bị
+		if (!this.status.equals(GameStatus.WAITING) && !this.status.equals(GameStatus.STARTING)) {
+			return false;
+		}
+		
+		// Kiểm tra xem người chơi mục tiêu có trong phòng không
+		if (!this.players.contains(target)) {
+			return false;
+		}
+		
+		// Không thể đá chính mình
+		if (leader.equals(target)) {
+			return false;
+		}
+		
+		// Đá người chơi ra khỏi phòng
+		leave(target, true, false, false);
+		
+		// Thông báo cho người chơi biết đã bị đá
+		target.sendMessage(Messages.get("KickPlayerTarget"));
+		
+		return true;
 	}
 
 	public void sendInfo(Map<String, Integer> mobMap) {

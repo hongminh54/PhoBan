@@ -12,6 +12,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import com.hongminh54.phoban.game.Game;
+import com.hongminh54.phoban.game.PlayerData;
 import com.hongminh54.phoban.manager.FileManager;
 import com.hongminh54.phoban.manager.FileManager.Files;
 
@@ -25,7 +26,7 @@ public class AEPhoBanTabCompleter implements TabCompleter {
     );
     
     private static final List<String> PLAYER_COMMANDS = Arrays.asList(
-            "join", "leave", "start", "help", "top"
+            "join", "leave", "start", "help", "top", "kick", "lockroom"
     );
 
     @Override
@@ -95,6 +96,21 @@ public class AEPhoBanTabCompleter implements TabCompleter {
                             playerNames.add(p.getName());
                         }
                         return filterCompletions(playerNames, args[1]);
+                    }
+                    break;
+                case "kick":
+                    // Chỉ hiển thị danh sách người chơi trong phòng ngoại trừ chủ phòng
+                    if (PlayerData.data().containsKey(player)) {
+                        Game game = PlayerData.data().get(player).getGame();
+                        if (game.isLeader(player)) {
+                            List<String> playersInRoom = new ArrayList<>();
+                            for (Player p : game.getPlayers()) {
+                                if (!p.equals(player)) {
+                                    playersInRoom.add(p.getName());
+                                }
+                            }
+                            return filterCompletions(playersInRoom, args[1]);
+                        }
                     }
                     break;
             }

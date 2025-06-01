@@ -1,14 +1,12 @@
 package com.hongminh54.phoban.gui;
 
-import com.hongminh54.phoban.AEPhoBan;
-import com.hongminh54.phoban.game.Game;
-import com.hongminh54.phoban.manager.FileManager;
-import com.hongminh54.phoban.manager.FileManager.Files;
-import com.hongminh54.phoban.utils.ItemBuilder;
-import com.hongminh54.phoban.utils.ItemUtil;
-import com.hongminh54.phoban.utils.Messages;
-import me.orineko.pluginspigottools.MethodDefault;
-import me.orineko.pluginspigottools.NBTTag;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -26,8 +24,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.File;
-import java.util.*;
+import com.hongminh54.phoban.AEPhoBan;
+import com.hongminh54.phoban.game.Game;
+import com.hongminh54.phoban.manager.FileManager;
+import com.hongminh54.phoban.manager.FileManager.Files;
+import com.hongminh54.phoban.utils.ItemBuilder;
+import com.hongminh54.phoban.utils.ItemUtil;
+import com.hongminh54.phoban.utils.Messages;
+
+import me.orineko.pluginspigottools.MethodDefault;
+import me.orineko.pluginspigottools.NBTTag;
 
 public class RewardGui implements Listener {
 
@@ -41,7 +47,7 @@ public class RewardGui implements Listener {
         }
         FileConfiguration room = game == null ? YamlConfiguration.loadConfiguration(configFile) : game.getConfig();
 
-        Inventory inv = Bukkit.createInventory(null, gui.getInt("RewardGui.Rows") * 9, gui.getString("RewardGui.Title").replace("&", "§").replace("<name>", name));
+        Inventory inv = Bukkit.createInventory(null, gui.getInt("RewardGui.Rows") * 9, gui.getString("RewardGui.Title").replace("&", "§").replace("<n>", name));
 
         HashMap<String, List<String>> replace = new HashMap<>();
         replace.put("<reward_amount>", Collections.singletonList(String.valueOf(room.getInt("RewardAmount", 0))));
@@ -66,40 +72,58 @@ public class RewardGui implements Listener {
             }
         });
 
-        for (int reward_slot : gui.getIntegerList("RewardGui.RewardSlot"))
+        // Lấy danh sách các slot phần thưởng từ cấu hình
+        List<Integer> rewardSlots = gui.getIntegerList("RewardGui.RewardSlot");
+        
+        // Đặt không khí vào các slot phần thưởng để đảm bảo chúng trống
+        for (int reward_slot : rewardSlots) {
             inv.setItem(reward_slot, new ItemStack(Material.AIR));
+        }
 
         if (room.contains("Reward")) {
             ConfigurationSection section = room.getConfigurationSection("Reward");
-            if (section != null) section.getKeys(false).forEach(s -> {
-                ItemStack originalItem = room.contains("Reward." + s + ".Command") ? new ItemStack(Material.PAPER) :
-                        room.getItemStack("Reward." + s + ".Item", new ItemStack(Material.PAPER));
-                ItemStack item = ItemUtil.copyItem(originalItem);
-                
-                ItemMeta meta = item.getItemMeta();
+            if (section != null) {
+                int slotIndex = 0;
+                for (String s : section.getKeys(false)) {
+                    // Kiểm tra xem còn slot khả dụng không
+                    if (slotIndex >= rewardSlots.size()) {
+                        break; // Không còn slot, dừng việc thêm phần thưởng
+                    }
+                    
+                    // Lấy slot tiếp theo từ danh sách
+                    int targetSlot = rewardSlots.get(slotIndex);
+                    slotIndex++;
+                    
+                    ItemStack originalItem = room.contains("Reward." + s + ".Command") ? new ItemStack(Material.PAPER) :
+                            room.getItemStack("Reward." + s + ".Item", new ItemStack(Material.PAPER));
+                    ItemStack item = ItemUtil.copyItem(originalItem);
+                    
+                    ItemMeta meta = item.getItemMeta();
 
-                if (meta != null) {
-                    if (room.contains("Reward." + s + ".Command")) {
-                        String command = room.getString("Reward." + s + ".Command");
-                        meta.setDisplayName("§f/" + command);
+                    if (meta != null) {
+                        if (room.contains("Reward." + s + ".Command")) {
+                            String command = room.getString("Reward." + s + ".Command");
+                            meta.setDisplayName("§f/" + command);
+                        }
+
+                        List<String> lores = meta.getLore() != null ? meta.getLore() : new ArrayList<>();
+                        lores.add("§r");
+                        for (String format : gui.getStringList("RewardGui.Format")) {
+                            lores.add(format.replace("&", "§").replace("<chance>",
+                                    String.valueOf(room.getInt("Reward." + s + ".Chance"))));
+                        }
+
+                        meta.setLore(lores);
+                        item.setItemMeta(meta);
                     }
 
-                    List<String> lores = meta.getLore() != null ? meta.getLore() : new ArrayList<>();
-                    lores.add("§r");
-                    for (String format : gui.getStringList("RewardGui.Format")) {
-                        lores.add(format.replace("&", "§").replace("<chance>",
-                                String.valueOf(room.getInt("Reward." + s + ".Chance"))));
-                    }
+                    item = NBTTag.setKey(item, "id_item_reward", s);
+                    item = NBTTag.setKey(item, "RewardGui_ID", s);
 
-                    meta.setLore(lores);
-                    item.setItemMeta(meta);
+                    // Đặt item vào slot cụ thể thay vì sử dụng addItem()
+                    inv.setItem(targetSlot, item);
                 }
-
-                item = NBTTag.setKey(item, "id_item_reward", s);
-                item = NBTTag.setKey(item, "RewardGui_ID", s);
-
-                inv.addItem(item);
-            });
+            }
         }
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(AEPhoBan.inst(), () -> {

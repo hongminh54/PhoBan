@@ -1,6 +1,7 @@
 package com.hongminh54.phoban;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -297,8 +298,14 @@ public final class AEPhoBan extends JavaPlugin {
             }
 
             case "help": {
-                for (String mess : FileManager.getFileConfig(Files.MESSAGE).getStringList("Help")) {
-                    sender.sendMessage(mess.replace("&", "§"));
+                if (sender.hasPermission("phoban.admin") || sender.hasPermission("phoban.edit")) {
+                    for (String mess : FileManager.getFileConfig(Files.MESSAGE).getStringList("HelpAdmin")) {
+                        sender.sendMessage(mess.replace("&", "§"));
+                    }
+                } else {
+                    for (String mess : FileManager.getFileConfig(Files.MESSAGE).getStringList("HelpMember")) {
+                        sender.sendMessage(mess.replace("&", "§"));
+                    }
                 }
                 return true;
             }
@@ -362,6 +369,11 @@ public final class AEPhoBan extends JavaPlugin {
                     }
                     
                     if (game.isLocked() && !p.hasPermission("phoban.admin")) {
+                        p.sendMessage(Messages.get("RoomLocked"));
+                        return true;
+                    }
+                    
+                    if (game.isLockedByLeader() && !p.hasPermission("phoban.admin")) {
                         p.sendMessage(Messages.get("RoomLocked"));
                         return true;
                     }
@@ -545,6 +557,19 @@ public final class AEPhoBan extends JavaPlugin {
                     return true;
                 }
                 
+                if (game.getStatus().equals(GameStatus.PLAYING) || game.getStatus().equals(GameStatus.STARTING)) {
+                    List<Player> players = new ArrayList<>(game.getPlayers());
+                    
+                    for (Player p : players) {
+                        p.sendMessage(Messages.get("AdminForceEndRoom"));
+                    }
+                    
+                    game.forceStop();
+                    
+                    sender.sendMessage(Messages.get("ForceEndRoomSuccess").replace("<room>", game.getName())
+                            .replace("<players>", String.valueOf(players.size())));
+                }
+                
                 game.setLocked(true);
                 sender.sendMessage(Messages.get("RoomLockedSuccess").replace("<room>", game.getName()));
                 return true;
@@ -569,6 +594,106 @@ public final class AEPhoBan extends JavaPlugin {
                 
                 game.setLocked(false);
                 sender.sendMessage(Messages.get("RoomUnlocked").replace("<room>", game.getName()));
+                return true;
+                
+            case "kick":
+                if (!(sender instanceof Player)) {
+                    sender.sendMessage(Messages.get("NotPlayer"));
+                    return true;
+                }
+                
+                Player kickerPlayer = (Player) sender;
+                
+                // Kiểm tra xem người chơi có trong phó bản không
+                if (!PlayerData.data().containsKey(kickerPlayer)) {
+                    kickerPlayer.sendMessage(Messages.get("NotInRoom"));
+                    return true;
+                }
+                
+                // Lấy thông tin phòng
+                Game kickerGame = PlayerData.data().get(kickerPlayer).getGame();
+                
+                // Kiểm tra xem người chơi có phải là chủ phòng không
+                if (!kickerGame.isLeader(kickerPlayer)) {
+                    kickerPlayer.sendMessage(Messages.get("KickPlayerNoPermission"));
+                    return true;
+                }
+                
+                // Kiểm tra trạng thái phòng
+                if (!kickerGame.getStatus().equals(GameStatus.WAITING) && !kickerGame.getStatus().equals(GameStatus.STARTING)) {
+                    kickerPlayer.sendMessage(Messages.get("KickPlayerWrongStatus"));
+                    return true;
+                }
+                
+                // Kiểm tra tham số
+                if (args.length < 2) {
+                    kickerPlayer.sendMessage(Messages.get("KickPlayerUsage"));
+                    return true;
+                }
+                
+                // Tìm người chơi bị đá
+                String targetName = args[1];
+                Player targetPlayer = null;
+                
+                for (Player p : kickerGame.getPlayers()) {
+                    if (p.getName().equalsIgnoreCase(targetName)) {
+                        targetPlayer = p;
+                        break;
+                    }
+                }
+                
+                if (targetPlayer == null) {
+                    kickerPlayer.sendMessage(Messages.get("KickPlayerNotFound"));
+                    return true;
+                }
+                
+                // Đá người chơi
+                if (kickerGame.kickPlayer(kickerPlayer, targetPlayer)) {
+                    kickerPlayer.sendMessage(Messages.get("KickPlayer").replace("<player>", targetPlayer.getName()));
+                }
+                
+                return true;
+                
+            case "lockroom":
+                if (!(sender instanceof Player)) {
+                    sender.sendMessage(Messages.get("NotPlayer"));
+                    return true;
+                }
+                
+                Player locker = (Player) sender;
+                
+                // Kiểm tra xem người chơi có trong phó bản không
+                if (!PlayerData.data().containsKey(locker)) {
+                    locker.sendMessage(Messages.get("NotInRoom"));
+                    return true;
+                }
+                
+                // Lấy thông tin phòng
+                Game lockerGame = PlayerData.data().get(locker).getGame();
+                
+                // Kiểm tra xem người chơi có phải là chủ phòng không
+                if (!lockerGame.isLeader(locker)) {
+                    locker.sendMessage(Messages.get("LockRoomNoPermission"));
+                    return true;
+                }
+                
+                // Kiểm tra trạng thái phòng
+                if (!lockerGame.getStatus().equals(GameStatus.WAITING) && !lockerGame.getStatus().equals(GameStatus.STARTING)) {
+                    locker.sendMessage(Messages.get("LockRoomWrongStatus"));
+                    return true;
+                }
+                
+                // Đảo ngược trạng thái khóa phòng
+                boolean newState = !lockerGame.isLockedByLeader();
+                lockerGame.setLockedByLeader(newState);
+                
+                // Thông báo
+                if (newState) {
+                    locker.sendMessage(Messages.get("LockRoomByLeader"));
+                } else {
+                    locker.sendMessage(Messages.get("UnlockRoomByLeader"));
+                }
+                
                 return true;
         }
         return false;

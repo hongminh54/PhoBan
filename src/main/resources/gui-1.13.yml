@@ -1,5 +1,5 @@
 EditorGui:
-  Title: "&lTuỳ Chỉnh Phó Bản | <name>"
+  Title: "Tuỳ Chỉnh Phó Bản | &b&l<name>"
   Rows: 6
 
   MobLoreFormat: " &7- &fx<amount> &e<mobs>"
@@ -326,14 +326,14 @@ EditorGui:
 
 
 RewardGui:
-  Title: "&lChỉnh Phần Thưởng | <name>"
+  Title: "Thiết Lập Phần Thưởng | &b&l<name>"
   Rows: 5
 
   RewardSlot: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
   Format:
-    - "&7Chance hiện tại: &a&l<chance>%"
+    - "&7Tỉ lệ hiện tại: &a&l<chance>%"
     - ""
-    - "&eLeft-Click: &fđể chỉnh &8/ &eRight-Click: &fđể xóa"
+    - "&eChuột trái: &fđể chỉnh sửa &8/ &eChuột phải: &fđể xóa"
   Content:
     none:
       ID: black_stained_glass_pane
@@ -343,21 +343,23 @@ RewardGui:
       ID: paper
       Name: "&a&lGIỚI HẠN PHẦN THƯỞNG"
       Lore:
-        - "&7&o(( Click vào đây để tùy chỉnh ))"
         - ""
         - "&fSố món tối đa: &e<reward_amount>"
         - ""
         - "&7&oĐây là giới hạn số món đồ mà mỗi"
         - "&7&ongười chơi sẽ nhận khi xong phó bản"
+        - ""
+        - "&7&o(( Click vào đây để chỉnh sửa ))"
       Slot: [39]
       ClickType: RewardAmount
     rewardcommand:
       ID: paper
       Name: "&a&lNHẬP THƯỞNG BẰNG LỆNH"
       Lore:
-        - "&7&o(( Click vào đây để tùy chỉnh ))"
         - ""
         - "&7&oThêm phần thưởng dưới dạng câu lệnh"
+        - ""
+        - "&7&o(( Click vào đây để chỉnh sửa ))"
       Slot: [40]
       ClickType: RewardCommand
     confirm:
@@ -368,7 +370,7 @@ RewardGui:
       ClickType: Confirm
 
 PhoBanGui:
-  Title: "&lChọn Phó Bản"
+  Title: "Chọn Phòng Phó Bản"
   Rows: 5
 
   PlayerFormat: "&7 - &6<player>"
@@ -382,11 +384,11 @@ PhoBanGui:
 
   NextPage:
     ID: arrow
-    Name: "&6&l&lNext Page"
+    Name: "&6&lTrang Sau"
     Slot: [41]
   PreviousPage:
     ID: arrow
-    Name: "&6&l&lPrevious Page"
+    Name: "&6&lTrang Trước"
     Slot: [39]
 
   WaitingRoom:
@@ -394,60 +396,60 @@ PhoBanGui:
     Name: "&f&lTHAM GIA: &r<prefix>"
     Lore:
       - "&7&m                                   "
-      - "&7Người chơi: &e<current>/<max> &fplayers"
+      - "&fSố lượng: &e<current>/<max> &fngười"
       - "<players>"
       - ""
-      - "&7Thời gian: &a<time>"
+      - "&fThời gian: &a<time>"
       - ""
-      - "&7Trạng thái: &a<status>"
+      - "&fTrạng thái: &a<status>"
       - ""
-      - "&c&l⚠ &7Khi chết sẽ bị trừ điểm nên"
-      - "&7hãy cẩn thận khi chiến đấu nhé!"
+      - "&7(Khi chết ở phó bản sẽ bị trừ điểm)"
+      - "&7(Chuột phải để xem trước phần thưởng)"
       - "&7&m                                   "
   StartingRoom:
     ID: yellow_concrete
     Name: "&f&lTHAM GIA: &r<prefix>"
     Lore:
       - "&7&m                                   "
-      - "&7Người chơi: &e<current>/<max> &fplayers"
+      - "&fSố lượng: &e<current>/<max> &fngười"
       - "<players>"
       - ""
-      - "&7Thời gian: &a<time>"
+      - "&fThời gian: &a<time>"
       - ""
-      - "&7Trạng thái: &a<status>"
+      - "&fTrạng thái: &a<status>"
       - ""
-      - "&c&l⚠ &7Khi chết sẽ bị trừ điểm nên"
-      - "&7hãy cẩn thận khi chiến đấu nhé!"
+      - "&7(Khi chết ở phó bản sẽ bị trừ điểm)"
+      - "&7(Chuột phải để xem trước phần thưởng)"
       - "&7&m                                   "
   PlayingRoom:
     ID: red_concrete
     Name: "&f&lTHAM GIA: &r<prefix>"
     Lore:
       - "&7&m                                   "
-      - "&7Người chơi: &e<current>/<max> &fplayers"
+      - "&fSố lượng: &e<current>/<max> &fngười"
       - "<players>"
       - ""
-      - "&7Thời gian: &a<time>"
+      - "&fThời gian: &a<time>"
       - ""
-      - "&7Trạng thái: &a<status>"
+      - "&fTrạng thái: &a<status>"
       - ""
-      - "&c&l⚠ &7Khi chết sẽ bị trừ điểm nên"
-      - "&7hãy cẩn thận khi chiến đấu nhé!"
+      - "&7(Khi chết ở phó bản sẽ bị trừ điểm)"
       - "&7&m                                   "
 
   StatusFormat:
-    WAITING: "&a&lCHƯA BẮT ĐẦU"
-    STARTING: "&6&lĐANG CHUẨN BỊ"
-    PLAYING: "&c&lĐÃ BẮT ĐẦU"
+    WAITING: "&aĐang Chờ"
+    STARTING: "&6Đang Chuẩn Bị"
+    PLAYING: "&cTrong Trận"
 
   TimeFormat:
     Minute: "<minute> phút"
     Second: "<second> giây"
+
   LockedStatus: "&c[KHÓA]"
   UnlockedStatus: ""
 
 ChooseTypeGui:
-  Title: "&lChọn Phó Bản"
+  Title: "Chọn Phó Bản"
   Rows: 5
 
   TypeSlot: [10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34]
@@ -459,39 +461,29 @@ ChooseTypeGui:
 
   NextPage:
     ID: arrow
-    Name: "&6&l&oNext Page"
+    Name: "&6&lTrang Sau"
     Slot: [41]
   PreviousPage:
     ID: arrow
-    Name: "&6&l&oPrevious Page"
+    Name: "&6&lTrang Trước"
     Slot: [39]
 
   TypeFormat:
-    ID: SLIME_BALL
-    Name: "&f&l&e&l<type>"
+    ID: DIAMOND_SWORD
+    Name: "&cPHÓ BẢN: &e&l<type>"
     Lore:
       - ""
-      - " &7Trạng thái: <status>"
+      - " &fTrạng thái: <status>"
       - ""
-      - " &e▸ &f&nTHÔNG TIN PHÓ BẢN"
+      - "&e&o(( CLick vào đây để chọn phòng ))"
       - ""
-      - " &7Số lượng ải: &e3"
-      - " &7Mức độ đánh giá: &a&lDỄ ẸC"
-      - ""
-      - " &e▸ &f&nPHẦN THƯỞNG"
-      - ""
-      - " &7- &ax64 &fviên kim cương"
-      - "    &7&o(có thể tùy chỉnh)"
-      - ""
-      - "&e&o(( CLick vào để chọn phòng ))"
-
   Format:
-    NoTurn: "&c&l✘ HẾT LƯỢT"
-    Join: "&a&l✔ CÒN LƯỢT"
+    NoTurn: "&cHết Lượt"
+    Join: "&aCòn Lượt"
 
 # Cấu hình giao diện xem trước phần thưởng
 RewardPreviewGui:
-  Title: "&6&lPhần Thưởng | <prefix>"
+  Title: "Phần Thưởng | &b&l<prefix>"
   Rows: 6
   
   # Cấu hình border xung quanh menu

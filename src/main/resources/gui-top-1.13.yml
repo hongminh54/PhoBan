@@ -6,22 +6,22 @@ MyTopSlot: 19
 
 TopFormat:
   ID: player_head
-  Name: "&e&l#<top>. &f&n<player>"
+  Name: "&e&l#<top>. &a<player>"
   Lore:
     - ""
-    - " &7Điểm phó bản: &c&l<point> ⚒"
+    - " &7Điểm phó bản: &c&l<point>"
     - ""
     - "&7&oTham gia phó bản và hoàn"
     - "&7&othành nó để có được điểm!"
 
 MyTopFormat:
   ID: oak_sign
-  Name: "&e&lNgười chơi: &f&n<player>"
+  Name: "&e&lNgười chơi: &a<player>"
   Lore:
     - ""
     - " &7Vị trí xếp hạng: &a&l#<top>"
     - ""
-    - " &7Điểm phó bản: &c&l<point> ⚒"
+    - " &7Điểm phó bản: &c&l<point>"
     - ""
     - "&7&oThông tin điểm phó bản của bạn"
 
